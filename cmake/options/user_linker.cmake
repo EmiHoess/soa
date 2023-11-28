@@ -1,10 +1,10 @@
-if(NOT PROJECT_IS_TOP_LEVEL OR __template__project_name_PACKAGING_MAINTAINER_MODE)
-  option(__template__project_name_WARNINGS_AS_ERRORS "Treat Warnings As Errors" OFF)
+if(NOT PROJECT_IS_TOP_LEVEL OR soa_PACKAGING_MAINTAINER_MODE)
+  option(soa_WARNINGS_AS_ERRORS "Treat Warnings As Errors" OFF)
 else()
-  option(__template__project_name_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
+  option(soa_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
 endif()
 
-macro(__template__project_name_user_linker_configure project_name)
+macro(soa_user_linker_configure project_name)
   include(CheckCXXCompilerFlag)
 
   set(USER_LINKER_OPTION

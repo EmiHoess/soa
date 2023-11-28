@@ -1,11 +1,11 @@
-if(NOT PROJECT_IS_TOP_LEVEL OR __template__project_name_PACKAGING_MAINTAINER_MODE)
-  option(__template__project_name_ENABLE_CCACHE "Enable ccache" OFF)
+if(NOT PROJECT_IS_TOP_LEVEL OR soa_PACKAGING_MAINTAINER_MODE)
+  option(soa_ENABLE_CCACHE "Enable ccache" OFF)
 else()
-  option(__template__project_name_ENABLE_CCACHE "Enable ccache" ON)
+  option(soa_ENABLE_CCACHE "Enable ccache" ON)
 endif()
 
 
-function(__template__project_name_enable_cache)
+function(soa_enable_cache)
   set(CACHE_OPTION
       "ccache"
       CACHE STRING "Compiler cache to be used")

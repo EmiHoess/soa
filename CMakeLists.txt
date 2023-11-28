@@ -34,12 +34,12 @@ project(
 include(utils/prevent_insource_builds)
 
 
-__template__project_name_setup_options()
-__template__project_name_global_options()
+soa_setup_options()
+soa_global_options()
 
 include(Dependencies.cmake)
-__template__project_name_setup_dependencies()
-__template__project_name_local_options()
+soa_setup_dependencies()
+soa_local_options()
 
 # don't know if this should be set globally from here or not...
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
@@ -53,15 +53,15 @@ string(
             8
             GIT_SHORT_SHA)
 
-target_compile_features(__template__project_name_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
+target_compile_features(soa_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 
-message("IPOOOOO is supported: ${__template__project_name_ENABLE_IPO}")
+message("IPOOOOO is supported: ${soa_ENABLE_IPO}")
 
-add_library(__template__project_name::__template__project_name_options ALIAS __template__project_name_options)
-add_library(__template__project_name::__template__project_name_warnings ALIAS __template__project_name_warnings)
+add_library(soa::soa_options ALIAS soa_options)
+add_library(soa::soa_warnings ALIAS soa_warnings)
 
-#add_library(__template__project_name::__template__project_name_options INTERFACE IMPORTED)
-#add_library(__template__project_name::__template__project_name_warnings INTERFACE IMPORTED)
+#add_library(soa::soa_options INTERFACE IMPORTED)
+#add_library(soa::soa_warnings INTERFACE IMPORTED)
 
 # configure files based on CMake configuration options
 #add_subdirectory(configured_files)
@@ -83,9 +83,9 @@ endif()
 #endif()
 
 
-#if(__template__project_name_BUILD_FUZZ_TESTS)
+#if(soa_BUILD_FUZZ_TESTS)
 #  message(AUTHOR_WARNING "Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
-#  if (NOT __template__project_name_ENABLE_ADDRESS_SANITIZER AND NOT __template__project_name_ENABLE_THREAD_SANITIZER)
+#  if (NOT soa_ENABLE_ADDRESS_SANITIZER AND NOT soa_ENABLE_THREAD_SANITIZER)
 #    message(WARNING "You need asan or tsan enabled for meaningful fuzz testing")
 #  endif()
 #  add_subdirectory(fuzz_test)
@@ -109,11 +109,11 @@ endif()
 
 # Add other targets that you want installed here, by default we just package the one executable
 # we know we want to ship
-__template__project_name_package_project(
+soa_package_project(
   TARGETS
   #intro
-  __template__project_name_options
-  __template__project_name_warnings
+  soa_options
+  soa_warnings
   # FIXME: this does not work! CK
   # PRIVATE_DEPENDENCIES_CONFIGURED project_options project_warnings
 )

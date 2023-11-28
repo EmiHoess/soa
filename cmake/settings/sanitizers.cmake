@@ -1,5 +1,5 @@
 function(
-  __template__project_name_enable_sanitizers
+  soa_enable_sanitizers
   project_name
   ENABLE_SANITIZER_ADDRESS
   ENABLE_SANITIZER_LEAK

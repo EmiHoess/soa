@@ -3,7 +3,7 @@ include(utils/download_cpm)
 # Done as a function so that updates to variables like
 # CMAKE_CXX_FLAGS don't propagate out to other
 # targets
-function(__template__project_name_setup_dependencies)
+function(soa_setup_dependencies)
 
   # For each dependency, see if it's
   # already been provided to us by a parent project
