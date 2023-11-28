@@ -1,0 +1,3 @@
+include(utils/new_library)
+
+add_default_options_library(__template__library_name __template__library_name.cpp)

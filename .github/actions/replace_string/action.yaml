@@ -1,0 +1,49 @@
+name: 'replace_string'
+description: 'sets up the shared cache'
+inputs:
+  folders:
+    required: true
+    type: string
+  new_safe_project:
+    required: true
+    type: string
+  path:
+    required: true
+    type: string
+  org:
+    required: true
+    type: string
+  new_project:
+    required: true
+    type: string
+  url:
+    required: true
+    type: string
+  description:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - run: find ${{ inputs.folders }} -type f -exec sed -i "s/__template__project_name/${{ inputs.new_safe_project }}/gi" .github/constants.env CMakeLists.txt Dependencies.cmake ProjectOptions.cmake .github/workflows/ci.yml .github/workflows/codeql-analysis.yml {} +
+      shell: bash
+    #- run: sed -i "s/%%myorg%%/${{ inputs.org }}/g" ${{ inputs.path }}/README.md
+    #  shell: bash
+    #- run: sed -i "s/%%__template__project_name%%/${{ inputs.new_project }}/g" ${{ inputs.path }}/README.md
+    #  shell: bash
+
+    # rename subdirectory
+    #- run: mv include/__template__project_name include/${{ inputs.new_safe_project }}
+    - run: find . -depth -type d -name '*__template__project_name*' -execdir bash -c 'mv -v "$1" "${1//__template__project_name/${{ inputs.new_safe_project }}}"' ${{ inputs.new_safe_project }} {} \;
+      shell: bash
+    - run: find ../../ -depth -name '*__template__library_name*' -execdir bash -c 'mv -v "$1" "${1//__template__library_name/example_library"' example_library {} \;
+      shell: bash
+    #- run: find ${{ inputs.folders }} -type f -exec sed -i "s/__template__library_name/example_library/gi" .github/constants.env CMakeLists.txt Dependencies.cmake ProjectOptions.cmake .github/workflows/ci.yml .github/workflows/codeql-analysis.yml {} +
+    #  shell: bash
+    
+    - run: cp ${{ inputs.path }}/README.md README.md
+      shell: bash
+
+      
+

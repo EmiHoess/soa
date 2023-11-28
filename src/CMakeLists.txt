@@ -1,0 +1,1 @@
+add_subdirectory(__template__library_name)
